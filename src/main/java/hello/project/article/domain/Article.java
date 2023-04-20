@@ -1,16 +1,18 @@
 package hello.project.article.domain;
 
+import hello.project.comm.BaseDateTime;
 import hello.project.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Article {
+public class Article extends BaseDateTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +34,8 @@ public class Article {
     @JoinColumn(name = "member_id")
     private Member author;
 
-    public Article(Long id, String title, String contents, String destination, String location, CurrentState currentState, Member author) {
+    public Article(Long id, String title, String contents, String destination, String location, CurrentState currentState, Member author,
+                   LocalDateTime createdTime, LocalDateTime modifiedTime) {
         this.id = id;
         this.title = title;
         this.contents = contents;
@@ -40,7 +43,7 @@ public class Article {
         this.location = location;
         this.currentState = currentState;
         this.author = author;
+        this.createdTime = createdTime;
+        this.modifiedTime = modifiedTime;
     }
-
-
 }
