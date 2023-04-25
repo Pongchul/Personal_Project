@@ -1,6 +1,6 @@
 package hello.project.member.domain;
 
-import hello.project.auth.PasswordEncoder;
+import hello.project.auth.support.PasswordEncoder;
 import hello.project.member.exception.MemberErrorCode;
 import hello.project.member.exception.MemberException;
 import lombok.AccessLevel;
