@@ -1,7 +1,7 @@
 package hello.project.member.presentation;
 
 
-import hello.project.member.application.MemberService;
+import hello.project.member.service.MemberService;
 import hello.project.member.dto.request.ChangeNameRequest;
 import hello.project.member.dto.request.ChangePasswordRequest;
 import hello.project.member.dto.request.SignUpRequest;
