@@ -1,4 +1,4 @@
-package hello.project.member.application;
+package hello.project.member.service;
 
 import hello.project.auth.support.PasswordEncoder;
 import hello.project.member.domain.*;
