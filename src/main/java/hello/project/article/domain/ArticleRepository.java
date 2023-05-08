@@ -8,10 +8,10 @@ import java.util.Optional;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    Optional<Article> findByAuthorAndId(Member author, Long Id);
+    Optional<Article> findByHostAndId(Member host, Long Id);
 
-    List<Article> findAllByAuthorAndCurrentStateNot(Member author, CurrentState currentState);
+    List<Article> findAllByHostAndCurrentStateNot(Member host, CurrentState currentState);
 
-    List<Article> findAllByAuthorAndCurrentState(Member author, CurrentState currentState);
+    List<Article> findAllByHostAndCurrentState(Member host, CurrentState currentState);
 
 }
