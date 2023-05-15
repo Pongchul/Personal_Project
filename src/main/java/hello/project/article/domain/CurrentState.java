@@ -10,5 +10,13 @@ public enum CurrentState {
 
     private final String currentState;
 
+    public boolean isCompleted() {
+        return this == COMPLETED;
+    }
+
+    public String getCurrentState() {
+        return currentState;
+    }
+
 
 }
