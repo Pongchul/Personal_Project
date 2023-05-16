@@ -8,6 +8,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ArticleErrorCode implements ErrorCode {
 
+    NOT_EXIST(404,"ARTICLE_001","존재하지 않는 모임입니다."),
+
     UNAUTHORIZED_TO_UPDATE(400, "ARTICLE_003", "게시글을 변경할 권한이 없습니다."),
 
     TITLE_CANNOT_BE_BLANK(400,"ARTICLE_004","제목은 공백일 수 없습니다."),
