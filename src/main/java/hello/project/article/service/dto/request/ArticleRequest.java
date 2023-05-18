@@ -10,6 +10,7 @@ public class ArticleRequest {
     private final String title;
     private final int capacity;
     private final String content;
+    private final String currentState;
     private final LocationRequest location;
     private final DestinationRequest destination;
 
@@ -32,6 +33,10 @@ public class ArticleRequest {
     }
     public Destination getDestination() {
         return destination.getLocation();
+    }
+
+    public String getCurrentState() {
+        return currentState;
     }
 
 

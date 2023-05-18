@@ -2,10 +2,10 @@ package hello.project.member.presentation;
 
 
 import hello.project.member.service.MemberService;
-import hello.project.member.dto.request.ChangeNameRequest;
-import hello.project.member.dto.request.ChangePasswordRequest;
-import hello.project.member.dto.request.SignUpRequest;
-import hello.project.member.dto.response.MyInfoResponse;
+import hello.project.member.service.dto.request.ChangeNameRequest;
+import hello.project.member.service.dto.request.ChangePasswordRequest;
+import hello.project.member.service.dto.request.SignUpRequest;
+import hello.project.member.service.dto.response.MyInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,6 @@
-package hello.project.member.dto.request;
+package hello.project.member.service.dto.request;
 
+import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class ChangePasswordRequest {
+public class ChangeNameRequest {
 
-    private String newPassword;
-
-    private String existingPassword;
+    @NotNull
+    private String name;
 }
