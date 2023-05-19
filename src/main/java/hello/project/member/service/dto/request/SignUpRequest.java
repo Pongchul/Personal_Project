@@ -1,4 +1,4 @@
-package hello.project.member.dto.request;
+package hello.project.member.service.dto.request;
 
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;

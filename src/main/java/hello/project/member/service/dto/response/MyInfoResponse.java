@@ -1,4 +1,4 @@
-package hello.project.member.dto.response;
+package hello.project.member.service.dto.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

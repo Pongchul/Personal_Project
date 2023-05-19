@@ -2,11 +2,11 @@ package hello.project.member.service;
 
 import hello.project.auth.support.PasswordEncoder;
 import hello.project.member.domain.*;
-import hello.project.member.dto.request.ChangeNameRequest;
-import hello.project.member.dto.request.ChangePasswordRequest;
-import hello.project.member.dto.request.SignUpRequest;
-import hello.project.member.dto.response.MemberResponseAssembler;
-import hello.project.member.dto.response.MyInfoResponse;
+import hello.project.member.service.dto.request.ChangeNameRequest;
+import hello.project.member.service.dto.request.ChangePasswordRequest;
+import hello.project.member.service.dto.request.SignUpRequest;
+import hello.project.member.service.dto.response.MemberResponseAssembler;
+import hello.project.member.service.dto.response.MyInfoResponse;
 import hello.project.member.exception.MemberErrorCode;
 import hello.project.member.exception.MemberException;
 import lombok.RequiredArgsConstructor;
