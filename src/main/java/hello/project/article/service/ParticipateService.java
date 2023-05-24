@@ -37,8 +37,8 @@ public class ParticipateService {
     @Transactional
     public void leave(Long articleId, Long memberId) {
         Article article = articleFindService.findArticle(articleId);
-        Member partcipant = memberFindService.findMember(memberId);
+        Member participant = memberFindService.findMember(memberId);
 
-        article.remove(partcipant);
+        article.remove(participant);
     }
 }
