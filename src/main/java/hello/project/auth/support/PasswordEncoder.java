@@ -1,4 +1,5 @@
-package hello.project.auth;
+package hello.project.auth.support;
+
 
 public interface PasswordEncoder {
 
