@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static hello.project.article.exception.ArticleErrorCode.*;
 
@@ -112,5 +115,15 @@ public class Participants {
 
     public boolean isHost(Member member) {
         return host.isSameUserId(member);
+    }
+
+    public List<Member> getParticipants() {
+        List<Member> members = participants.stream()
+                .map(Participant::getMember)
+                .collect(Collectors.toUnmodifiableList());
+
+        return Stream.of(List.of(host), members)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toUnmodifiableList());
     }
 }
