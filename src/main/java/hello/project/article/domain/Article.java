@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static hello.project.article.exception.ArticleErrorCode.ALREADY_CLOSED_EARLY;
 
@@ -56,13 +57,21 @@ public class Article extends BaseDateTime {
         this.modifiedTime = modifiedTime;
     }
 
-    public void update(Capacity capacity, Contents contents, Location location, Title title, LocalDateTime modifiedTime, CurrentState currentState) {
+    public Article(Member host,CurrentState currentState, Capacity capacity, Title title, Location location, Destination destination, Contents contents) {
+        this.participants = new Participants(host, capacity);
+        this.title = title;
+        this.location = location;
+        this.destination = destination;
+        this.contents = contents;
+        this.currentState = currentState;
+    }
+
+    public void update(Capacity capacity, Contents contents, Location location, Title title, CurrentState currentState) {
         validateGroupIsProceeding();
         this.participants.updateCapacity(capacity);
         this.contents = contents;
         this.location = location;
         this.title = title;
-        this.modifiedTime = modifiedTime;
         this.currentState = currentState;
     }
 
@@ -81,6 +90,16 @@ public class Article extends BaseDateTime {
         }
     }
 
+    public void participate(Member member) {
+        validateGroupIsProceeding();
+        participants.participant(this, member);
+    }
+
+    public void remove(Member participant) {
+        validateGroupIsProceeding();
+        participants.remove(participant);
+    }
+
     public boolean isHost(Member member) {
         return participants.isHost(member);
     }
@@ -90,6 +109,37 @@ public class Article extends BaseDateTime {
     }
 
 
+    public Member getHost() {
+        return participants.getHost();
+    }
+
+    public boolean isFinishedRecruitment() {
+        return closedEarly;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public Destination getDestination() {
+        return destination;
+    }
+
+    public Contents getContents() {
+        return contents;
+    }
+
+    public String getTitle() {
+        return title.getValue();
+    }
+
+    public int getCapacity() {
+        return participants.getCapacity().getValue();
+    }
+
+    public List<Member> getParticipants() {
+        return participants.getParticipants();
+    }
 
 
 }
