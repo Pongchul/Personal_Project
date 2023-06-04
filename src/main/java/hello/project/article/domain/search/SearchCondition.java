@@ -5,20 +5,20 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SearchCondition {
 
-    private String location;
     private String keyword;
-    private String CurrentState;
-    private boolean closedEarly;
+    private boolean orderByCurrentState;
+    private boolean excludeFinished;
 
-    public String getLocation() {
-        return location;
-    }
 
     public String getKeyword() {
         return keyword;
     }
 
-    public boolean closedEarly() {
-        return closedEarly;
+    public boolean orderByCurrentState() {
+        return orderByCurrentState;
+    }
+
+    public boolean excludeFinished() {
+        return excludeFinished;
     }
 }
