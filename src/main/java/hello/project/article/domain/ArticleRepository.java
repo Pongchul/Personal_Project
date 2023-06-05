@@ -1,17 +1,14 @@
 package hello.project.article.domain;
 
 import hello.project.member.domain.Member;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ArticleRepository extends JpaRepository<Article, Long> {
+public interface ArticleRepository extends Repository<Article, Long> {
 
-    Optional<Article> findByHostAndId(Member host, Long Id);
+    Article save(Article article);
 
-    List<Article> findAllByHostAndCurrentStateNot(Member host, CurrentState currentState);
-
-    List<Article> findAllByHostAndCurrentState(Member host, CurrentState currentState);
-
+    void deleteById(Long id);
 }
