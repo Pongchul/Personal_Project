@@ -10,6 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.regex.Pattern;
 
+import static hello.project.member.exception.MemberErrorCode.*;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Embeddable
 public class Password {
@@ -47,7 +49,7 @@ public class Password {
 
     private static void validatePatternIsValid(String value) {
         if (isNotValid(value)) {
-            throw new MemberException(MemberErrorCode.MEMBER_PASSWORD_PATTERN_MUST_BE_VALID);
+            throw new MemberException(MEMBER_PASSWORD_PATTERN_MUST_BE_VALID);
         }
     }
 
