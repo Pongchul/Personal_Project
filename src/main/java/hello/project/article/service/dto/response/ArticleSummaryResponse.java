@@ -14,5 +14,6 @@ public class ArticleSummaryResponse {
     private int capacity;
     private boolean finished;
     private LocationResponse location;
+    private boolean like;
     private DestinationResponse destination;
 }

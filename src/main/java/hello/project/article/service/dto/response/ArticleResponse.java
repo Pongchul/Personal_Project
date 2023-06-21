@@ -19,7 +19,8 @@ public class ArticleResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime createdTime;
     private LocationResponse location;
-    private DestinationResponse description;
+    private boolean like;
+    private DestinationResponse destination;
 
 
 }
