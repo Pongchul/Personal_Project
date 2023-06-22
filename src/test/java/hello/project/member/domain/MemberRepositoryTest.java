@@ -27,7 +27,6 @@ class MemberRepositoryTest {
     private EntityManager em;
 
     private static final UserId USER_ID = UserId.userId("pongchul");
-    private static final UserName USER_NAME = UserName.from("퐁철");
     private static final Password PASSWORD = Password.encrypt("pongchul1!", new SHA256Encoder());
 
     @DisplayName("회원을 저장한다.")
