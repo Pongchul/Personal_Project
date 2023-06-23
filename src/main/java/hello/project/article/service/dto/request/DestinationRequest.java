@@ -7,9 +7,10 @@ import lombok.RequiredArgsConstructor;
 public class DestinationRequest {
 
     private final String address;
+    private final String buildName;
     private final String detail;
 
     public Destination getLocation() {
-        return new Destination(address, detail);
+        return new Destination(address,buildName,detail);
     }
 }

@@ -8,5 +8,6 @@ import lombok.Getter;
 public class DestinationResponse {
 
     private String address;
+    private String buildName;
     private String detail;
 }

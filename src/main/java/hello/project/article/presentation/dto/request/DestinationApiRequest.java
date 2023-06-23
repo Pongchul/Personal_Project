@@ -17,5 +17,8 @@ public class DestinationApiRequest {
     private String address;
 
     @NotNull
+    private String buildName;
+
+    @NotNull
     private String detail;
 }
