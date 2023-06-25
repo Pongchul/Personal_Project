@@ -23,7 +23,7 @@ public interface ArticleSearchRepository extends Repository<Article, Long>, Arti
 
     @Query("select a from Article a "
             + "where a.participants.host = :member "
-            + "OR ( :member IN (SELECT p.member.Id FROM Participant p WHERE p.article = a) )")
+            + "OR ( :member IN (SELECT p.member.id FROM Participant p WHERE p.article = a) )")
     List<Article> findParticipatedArticles(@Param("member") Member member);
 
     boolean existsById(Long id);
