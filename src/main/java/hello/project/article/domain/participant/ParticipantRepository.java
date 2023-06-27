@@ -15,6 +15,6 @@ public interface ParticipantRepository extends Repository<Participant, Long> {
     void deleteAllByArticleId(@Param("articleId") Long articleId);
 
     @Modifying
-    @Query("delete from Participant p where p.member.Id = :memberId and p.article in (:articles)")
+    @Query("delete from Participant p where p.member.id = :memberId and p.article in (:articles)")
     void deleteAllByMemberIdInArticles(@Param("memberId") Long memberId, @Param("articles") List<Article> articles);
 }
