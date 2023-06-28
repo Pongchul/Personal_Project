@@ -31,8 +31,4 @@ public class ArticleApiRequest {
     @NotNull
     private CurrentState currentState;
 
-
-
-    @NotNull
-    private String description;
 }
