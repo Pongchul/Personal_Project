@@ -14,10 +14,10 @@ public class ArticleRequestAssembler {
     }
 
     private LocationRequest locationRequest(LocationApiRequest request) {
-        return new LocationRequest(request.getAddress(), request.getDetail());
+        return new LocationRequest(request.getAddress(),request.getBuildName(), request.getDetail());
     }
 
     private DestinationRequest destinationRequest(DestinationApiRequest request) {
-        return new DestinationRequest(request.getAddress(), request.getDetail());
+        return new DestinationRequest(request.getAddress(), request.getBuildName(),request.getDetail());
     }
 }
