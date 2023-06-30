@@ -10,6 +10,8 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import static hello.project.member.exception.MemberErrorCode.*;
+
 @ToString(includeFieldNames = false)
 @Embeddable
 @Getter
@@ -42,26 +44,26 @@ public class UserId {
 
     private static void validateNotBlank(String value) {
         if (value.isBlank()) {
-            throw new MemberException(MemberErrorCode.USER_ID_SHOULD_NOT_BE_BLANK);
+            throw new MemberException(USER_ID_SHOULD_NOT_BE_BLANK);
         }
     }
 
     private static void validateLengthInRange(String userId) {
         int length = userId.length();
         if (length < MINIMUM_LENGTH || MAXIMUM_LENGTH < length) {
-            throw new MemberException(MemberErrorCode.USER_ID_CANNOT_BE_OUT_OF_RANGE);
+            throw new MemberException(USER_ID_CANNOT_BE_OUT_OF_RANGE);
         }
     }
 
     private static void validateNotEmailPattern(String value) {
         if (value.contains(EMAIL_FORMAT)) {
-            throw new MemberException(MemberErrorCode.SIGNUP_INVALID_ID);
+            throw new MemberException(SIGNUP_INVALID_ID);
         }
     }
 
     private static void validateEmailPattern(String value) {
         if (!value.contains(EMAIL_FORMAT)) {
-            throw new MemberException(MemberErrorCode.USER_ID_SHOULD_BE_EMAIL_FORMAT);
+            throw new MemberException(USER_ID_SHOULD_BE_EMAIL_FORMAT);
         }
     }
 
