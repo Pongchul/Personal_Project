@@ -13,6 +13,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static hello.project.article.domain.CurrentState.COMPLETED;
 import static hello.project.article.exception.ArticleErrorCode.ALREADY_CLOSED_EARLY;
 
 @Entity
@@ -66,16 +67,18 @@ public class Article extends BaseDateTime {
         this.currentState = currentState;
     }
 
-    public void update(Capacity capacity, Contents contents, Location location, Title title, CurrentState currentState) {
+    public void update(Capacity capacity, Contents contents, Location location, Title title, Destination destination, CurrentState currentState) {
         validateGroupIsProceeding();
         this.participants.updateCapacity(capacity);
         this.contents = contents;
         this.location = location;
         this.title = title;
+        this.destination = destination;
         this.currentState = currentState;
     }
 
     public void closeEarly() {
+        currentState.isCompleted();
         validateGroupIsProceeding();
         closedEarly = true;
     }
