@@ -43,6 +43,13 @@ public enum ArticleFixture {
     }
 
 
+    public Location getLocationObject() {
+        return new Location(location.getAddress(), location.getBuildingName(), location.getDetail());
+    }
+
+    public Destination getDestinationObject() {
+        return new Destination(destination.getAddress(), destination.getBuildingName(), destination.getDetail());
+    }
     public Article toArticle(Member host) {
         return builder().toArticle(host);
     }
@@ -99,6 +106,7 @@ public enum ArticleFixture {
         public ArticleApiRequest toApiRequest() {
             return new ArticleApiRequest(title, capacity, contents, location.toApiRequest(), destination.toApiRequest(), currentState);
         }
+
     }
 
 }
