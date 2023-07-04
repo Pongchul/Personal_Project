@@ -32,9 +32,10 @@ public class Member {
     private boolean deleted;
 
 
-    public Member(UserId userId, Password password) {
+    public Member(UserId userId, Password password, UserName userName) {
         this.userId = userId;
         this.password = password;
+        this.userName = userName;
     }
 
     public boolean isNotSamePassword(String password) {
