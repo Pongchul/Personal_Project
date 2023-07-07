@@ -10,6 +10,8 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import static hello.project.member.exception.MemberErrorCode.*;
+
 @ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -37,14 +39,14 @@ public class UserName {
 
     private static void validateNotBlank(String value) {
         if (value.isBlank()) {
-            throw new MemberException(MemberErrorCode.MEMBER_NAME_SHOULD_NOT_BE_BLANK);
+            throw new MemberException(MEMBER_NAME_SHOULD_NOT_BE_BLANK);
         }
     }
 
     private static void validateLengthInRange(String value) {
         int length = value.length();
         if (length < MINIMUM_LENGTH || MAXIMUM_LENGTH < length) {
-            throw new MemberException(MemberErrorCode.MEMBER_NAME_CANNOT_BE_OUT_OF_RANGE);
+            throw new MemberException(MEMBER_NAME_CANNOT_BE_OUT_OF_RANGE);
         }
     }
 }
