@@ -14,6 +14,6 @@ public interface TokenRepository extends Repository<Token, Long> {
     Optional<Token> findByMemberId(Long memberId);
 
     @Modifying
-    @Query("delete from Token t where t.member.Id = :memberId")
+    @Query("delete from Token t where t.member.id = :memberId")
     void deleteByMemberId(@Param("memberId") Long memberId);
 }
