@@ -13,12 +13,13 @@ class MemberTest {
 
     private static final UserId USER_ID = UserId.userId("pongchul");
     private static final Password PASSWORD = Password.encrypt("pongchul1!", new SHA256Encoder());
+    private static final UserName USER_NAME = UserName.from("인철");
 
     @Test
     @DisplayName("멤버 생성하기")
     void createMember() {
 
-        Member member = new Member(USER_ID, PASSWORD);
+        Member member = new Member(USER_ID, PASSWORD, USER_NAME);
         assertDoesNotThrow(() -> member);
     }
 
