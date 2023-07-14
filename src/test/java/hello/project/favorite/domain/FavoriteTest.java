@@ -39,7 +39,7 @@ class FavoriteTest {
     @Test
     void isSameArticle() {
         Favorite favorite = new Favorite(toGangNamArticleId, memberId);
-        boolean actual = favorite.isSameArticle(toSimDoRimArticleId);
+        boolean actual = favorite.isSameArticle(toGangNamArticleId);
 
         assertThat(actual).isTrue();
     }
