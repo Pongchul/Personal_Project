@@ -28,11 +28,12 @@ class MemberRepositoryTest {
 
     private static final UserId USER_ID = UserId.userId("pongchul");
     private static final Password PASSWORD = Password.encrypt("pongchul1!", new SHA256Encoder());
+    private static final UserName USER_NAME = UserName.from("인철");
 
     @DisplayName("회원을 저장한다.")
     @Test
     void save() {
-        Member member = new Member(USER_ID, PASSWORD);
+        Member member = new Member(USER_ID, PASSWORD, USER_NAME);
         Long id = memberRepository.save(member).getId();
 
         assertThat(id).isNotNull();
@@ -42,7 +43,7 @@ class MemberRepositoryTest {
     @Test
     void findById() {
 
-        Member member = new Member(USER_ID, PASSWORD);
+        Member member = new Member(USER_ID, PASSWORD, USER_NAME);
         Member savedMember = memberRepository.save(member);
 
 
@@ -56,7 +57,7 @@ class MemberRepositoryTest {
     @DisplayName("USER_ID, PASSWORD가 일치하는 회원 조회한다.")
     @Test
     void findByUserIdAndPassword() {
-        Member member = new Member(USER_ID, PASSWORD);
+        Member member = new Member(USER_ID, PASSWORD, USER_NAME);
         Member savedMember = memberRepository.save(member);
 
         Optional<Member> byUserIdAndPassword = memberRepository.findByUserIdAndPassword(USER_ID, PASSWORD);
