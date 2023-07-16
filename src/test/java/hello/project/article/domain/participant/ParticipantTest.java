@@ -60,7 +60,7 @@ class ParticipantTest {
 
         assertThatThrownBy(() -> participants.participant(ARTICLE, HOST))
                 .isInstanceOf(ArticleException.class)
-                .hasMessage("MEMBER_IS_PARTICIPANT");
+                .hasMessage("MEMBER_IS_HOST");
     }
 
 }
