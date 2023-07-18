@@ -48,7 +48,7 @@ class MemberServiceTest {
     @BeforeEach
     void setUp() {
         password = Password.encrypt("pongchul1!", new SHA256Encoder());
-        savedHost = memberRepository.save(new Member(UserId.userId("게시글 장"), password));
+        savedHost = memberRepository.save(new Member(UserId.userId("게시글 장"), password, UserName.from("inchul")));
     }
 
     @Nested // 여러 테스트 그룹간의 관계를 표현할 수 있고 계층적으로 나타낼 수 있다.
@@ -63,7 +63,7 @@ class MemberServiceTest {
         @DisplayName("회원 가입을 한다")
         @Test
         void signUp() {
-            SignUpRequest request = new SignUpRequest(USER_ID, PASSWORD);
+            SignUpRequest request = new SignUpRequest(USER_ID, PASSWORD, USER_NAME);
             Long id = memberService.signUp(request);
 
             assertThat(id).isNotNull();
@@ -72,13 +72,25 @@ class MemberServiceTest {
         @DisplayName("이미 존재하는 아이디로 회원 가입을 하는 경우 실패한다")
         @Test
         void signUpDuplicatedUserid() {
-            SignUpRequest request = new SignUpRequest(USER_ID, PASSWORD);
+            SignUpRequest request = new SignUpRequest(USER_ID, PASSWORD, USER_NAME);
             memberService.signUp(request);
 
-            SignUpRequest newRequest = new SignUpRequest(USER_ID, PASSWORD);
+            SignUpRequest newRequest = new SignUpRequest(USER_ID, PASSWORD, USER_NAME);
             assertThatThrownBy(() -> memberService.signUp(newRequest))
                     .isInstanceOf(MemberException.class)
                     .hasMessageContaining("SIGNUP_USER_ID_DUPLICATED");
+        }
+
+        @DisplayName("이미 존재하는 이름으로 회원 가입을 하는 경우 실패한다")
+        @Test
+        void signUpDuplicatedName() {
+            SignUpRequest request = new SignUpRequest("phosphorus", "phosphorus1!", "인철");
+            memberService.signUp(request);
+
+            SignUpRequest newRequest = new SignUpRequest("new" + USER_ID, PASSWORD, USER_NAME);
+            assertThatThrownBy(() -> memberService.signUp(newRequest))
+                    .isInstanceOf(MemberException.class)
+                    .hasMessageContaining("SIGNUP_USER_NAME_DUPLICATED");
         }
 
     }
@@ -86,7 +98,7 @@ class MemberServiceTest {
     @DisplayName("회원 정보를 조회한다")
     @Test
     void findById() {
-        SignUpRequest request = new SignUpRequest("phosphorus", "phosphorus1!");
+        SignUpRequest request = new SignUpRequest("phosphorus", "phosphorus1!", "인철");
         Long memberId = memberService.signUp(request);
 
         MyInfoResponse response = memberService.findById(memberId);
@@ -119,7 +131,7 @@ class MemberServiceTest {
     @Test
     void updatePassword() {
         String beforePassword = "password1!!";
-        SignUpRequest signUpRequest = new SignUpRequest("pongchul", beforePassword);
+        SignUpRequest signUpRequest = new SignUpRequest("pongchul", beforePassword, "인철");
         Long memberId = memberService.signUp(signUpRequest);
 
         ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest("newPassword123!", beforePassword);
@@ -135,7 +147,7 @@ class MemberServiceTest {
     @Test
     void updatePasswordWithWrongPassword() {
         String password = "pongchul1!";
-        SignUpRequest request = new SignUpRequest("pongchul", password);
+        SignUpRequest request = new SignUpRequest("pongchul", password, "인철");
         Long memberId = memberService.signUp(request);
 
         ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest("newPassword123!", "wrongPassword");
@@ -157,6 +169,13 @@ class MemberServiceTest {
                         .hasMessage("MEMBER_DELETED")
 
         );
+    }
+    @DisplayName("존재하지 않는 회원 정보를 삭제한다")
+    @Test
+    void deleteNotExistMember() {
+        assertThatThrownBy(() -> memberService.findById(1000L))
+                .isInstanceOf(MemberException.class)
+                .hasMessage("멤버가 존재하지 않습니다.");
     }
 
     @DisplayName("회원 정보 삭제 시 참여한 모임 중 진행중인 모임이 있을 경우 모임에 탈퇴시킨다")
@@ -184,7 +203,7 @@ class MemberServiceTest {
     }
 
     private Long createMember() {
-        SignUpRequest request = new SignUpRequest("pongchul", "pongchul1!" );
+        SignUpRequest request = new SignUpRequest("pongchul", "pongchul1!", "인철");
         return memberService.signUp(request);
     }
 
