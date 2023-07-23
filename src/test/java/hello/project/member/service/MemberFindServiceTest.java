@@ -1,10 +1,7 @@
 package hello.project.member.service;
 
 import hello.project.auth.support.SHA256Encoder;
-import hello.project.member.domain.Member;
-import hello.project.member.domain.MemberRepository;
-import hello.project.member.domain.Password;
-import hello.project.member.domain.UserId;
+import hello.project.member.domain.*;
 import hello.project.member.exception.MemberErrorCode;
 import hello.project.member.exception.MemberException;
 import org.junit.jupiter.api.DisplayName;
@@ -30,11 +27,13 @@ class MemberFindServiceTest {
 
     private static final UserId USER_ID = UserId.userId("pongchul");
     private static final Password PASSWORD = Password.encrypt("pongchul1!", new SHA256Encoder());
+    private static final UserName USER_NAME = UserName.from("인철");
+
 
     @DisplayName("회원을 조회한다.")
     @Test
     void findMember() {
-        Member expected = memberRepository.save(new Member(USER_ID, PASSWORD));
+        Member expected = memberRepository.save(new Member(USER_ID, PASSWORD,USER_NAME));
 
         Member actual = memberFindService.findMember(expected.getId());
 
@@ -53,7 +52,7 @@ class MemberFindServiceTest {
     @DisplayName("삭제된 회원을 조회하는 경우 예외가 발생한다")
     @Test
     void findDeletedMember() {
-        Member member = memberRepository.save(new Member(USER_ID, PASSWORD));
+        Member member = memberRepository.save(new Member(USER_ID, PASSWORD, USER_NAME));
         member.delete();
 
         assertThatThrownBy(() -> memberFindService.findMember(member.getId()))
@@ -64,7 +63,7 @@ class MemberFindServiceTest {
     @DisplayName("아이디와 비밀번호로 회원을 조회한다")
     @Test
     void findMemberByIdAndPassword() {
-        Member member = memberRepository.save(new Member(USER_ID, PASSWORD));
+        Member member = memberRepository.save(new Member(USER_ID, PASSWORD, USER_NAME));
 
         Member foundMember = memberFindService.findByUserIdAndPassword(USER_ID, PASSWORD);
         assertThat(foundMember).usingRecursiveComparison()
@@ -74,7 +73,7 @@ class MemberFindServiceTest {
     @DisplayName("잘못된 아이디와 비밀번호로 회원을 조회하는 경우 예외가 발생한다")
     @Test
     void findMemberByIdAndWrongPassword() {
-        Member member = memberRepository.save(new Member(USER_ID, PASSWORD));
+        Member member = memberRepository.save(new Member(USER_ID, PASSWORD, USER_NAME));
 
         Password wrongPassword = Password.encrypt("wrong123!", new SHA256Encoder());
         assertThatThrownBy(
