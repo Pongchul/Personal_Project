@@ -18,6 +18,6 @@ public class ArticleSearchRequest {
     private boolean alreadyClosed;
 
     public SearchCondition toFindCondition() {
-        return new SearchCondition(location,keyword,CurrentState,alreadyClosed);
+        return new SearchCondition(keyword, toFindCondition().orderByCurrentState(), toFindCondition().excludeFinished());
     }
 }
